@@ -3,7 +3,8 @@
     android:fillAfter="true">
     <translate
         android:fromYDelta="100%"
-        android:toYDelta="0%"/>
+        android:toYDelta="0%"
+        android:duration= "300"/>
     <scale
         android:pivotY="50%"
         android:pivotX="50%"
@@ -11,7 +12,7 @@
         android:toYScale="0.8"/>
     <alpha
         android:fromAlpha="0"
-        android:toAlpha="100"
+        android:toAlpha="1"
         android:duration="800"/>
 
 </set>
