@@ -107,6 +107,14 @@ public class MainActivity extends AppCompatActivity {
                         }).check();
             }
         });
+
+        //gallery fragment call image place
+        gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new galleryFragment()).commit();
+            }
+        });
     }
 
     private void openCamera() {
