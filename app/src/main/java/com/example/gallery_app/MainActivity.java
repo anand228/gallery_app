@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karumi.dexter.Dexter;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton add, camera, gallery, share;
     Animation rotateOpen, rotateClose, fromBottom, toBottom;
+    TextView text1, text2;
 
     boolean isOpen = false;
     @Override
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         camera = findViewById(R.id.camera_button);
         share = findViewById(R.id.share_button);
         gallery = findViewById(R.id.gallery_button);
+        text1 = findViewById(R.id.page1text1);
+        text2 = findViewById(R.id.page1text2);
     }
 
     private void loadAnimation() {
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Dexter.withContext(MainActivity.this)
-                        .withPermissions(Manifest.permission.CAMERA)
+                        .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                         .withListener(new MultiplePermissionsListener() {
                             @Override
                             public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
@@ -95,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                                 if(multiplePermissionsReport.areAllPermissionsGranted()){
                                     Toast.makeText(MainActivity.this, "all permissions are granted", Toast.LENGTH_SHORT).show();
                                     openCamera();
+                                    text1.setVisibility(View.GONE);
+                                    text2.setVisibility(View.GONE);
                                 }
                                 else Toast.makeText(MainActivity.this, "all permissions are not granted", Toast.LENGTH_SHORT).show();
 
@@ -108,13 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //gallery fragment call image place
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new galleryFragment()).commit();
-            }
-        });
     }
 
     private void openCamera() {
