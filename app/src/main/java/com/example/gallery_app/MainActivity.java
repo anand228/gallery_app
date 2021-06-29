@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton add, camera, gallery, share;
     Animation rotateOpen, rotateClose, fromBottom, toBottom;
     TextView text1, text2;
+    GridView grid;
 
     boolean isOpen = false;
     @Override
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         gallery = findViewById(R.id.gallery_button);
         text1 = findViewById(R.id.page1text1);
         text2 = findViewById(R.id.page1text2);
+        grid = (GridView)findViewById(R.id.grid_image);
+        grid.setAdapter(new GridAdapter(this));
     }
 
     private void loadAnimation() {
